@@ -24,3 +24,12 @@ test("should fetch job title metrics", async () => {
   expect(response.statusCode).toBe(200);
 
 });
+
+test("should return 404 for empty job title metrics", async () => {
+
+  const response = await request(app)
+    .get("/metrics/job-title/UnknownRole");
+
+  expect(response.statusCode).toBe(404);
+
+});

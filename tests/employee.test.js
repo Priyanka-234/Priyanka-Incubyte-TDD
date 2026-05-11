@@ -24,3 +24,39 @@ test("should get employee by id", async () => {
   expect(response.statusCode).toBe(200);
 
 });
+
+test("should return 404 when updating non existing employee", async () => {
+
+  const response = await request(app)
+    .put("/employees/999")
+    .send({
+      fullName: "Test",
+      jobTitle: "Developer",
+      country: "India",
+      salary: 10000
+    });
+
+  expect(response.statusCode).toBe(404);
+
+});
+
+test("should return 404 when deleting non existing employee", async () => {
+
+  const response = await request(app)
+    .delete("/employees/999");
+
+  expect(response.statusCode).toBe(404);
+
+});
+
+test("should fail for missing required fields", async () => {
+
+  const response = await request(app)
+    .post("/employees")
+    .send({
+      fullName: "Priyanka"
+    });
+
+  expect(response.statusCode).toBe(400);
+
+});
