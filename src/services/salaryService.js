@@ -1,18 +1,19 @@
-const calculateSalary = (employee) => {
+module.exports = ({ country, salary }) => {
 
-  let tds = 0;
+  let tdsPercentage = 0;
 
-  if (employee.country.toLowerCase() === "india") {
-    tds = employee.salary * 0.10;
-  } else if (employee.country.toLowerCase() === "united states") {
-    tds = employee.salary * 0.12;
+  if (country.toLowerCase() === "india") {
+    tdsPercentage = 10;
+  } else if (country.toLowerCase() === "united states") {
+    tdsPercentage = 12;
   }
 
-  return {
-    grossSalary: employee.salary,
-    tds,
-    netSalary: employee.salary - tds
-  };
-};
+  const tds = (salary * tdsPercentage) / 100;
 
-module.exports = calculateSalary;
+  return {
+    grossSalary: salary,
+    tds,
+    netSalary: salary - tds
+  };
+
+};
